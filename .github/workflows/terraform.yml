@@ -52,11 +52,25 @@ jobs:
       - name: Terraform plan
         id: plan
 #         if: github.event_name == 'pull_request'
-        run: terraform plan
+        run: terraform plan -out saved_plan
+        
+      - name: Submit Plan for approval
+        uses: ./github-action-wait-for-terraform-plan-approval@v1
+        id: submit_plan
+        with:
+          command: submit
+          plan_contents: ${{steps.plan.outputs.stdout}}
+        
+      - name: Wait for approval
+        uses: ./github-action-wait-for-terraform-plan-approval@v1
+        with:
+          command: wait
+          plan_id: ${{steps.submit_plan.outputs.plan_id}}
+          timeout_seconds: 6000
         
       - name: Terraform Apply
         id: apply
-        run: terraform apply --auto-approve
+        run: terraform apply --auto-approve saved_plan
 #         continue-on-error: true
       
 #       - uses: actions/github-script@v6
