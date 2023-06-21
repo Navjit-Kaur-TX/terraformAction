@@ -6,19 +6,19 @@ terraform {
   }
 
   backend "s3" {
-    region = "us-west-2"
+    region = "us-east-1"
     key    = "terraform.tfstate"
   }
 }
 
 provider "aws" {
-  region = "us-west-2"
+  region = "us-east-1"
 }
 
-resource "aws_instance" "test_instance" {
-  ami           = "ami-830c94e3"
-  instance_type = "t2.nano"
+resource "aws_instance" "test_instance1" {
+  ami           = "ami-053b0d53c279acc90"
+  instance_type = "t2.micro"
   tags = {
-    Name = "test_instance"
+    Name = "test_instance1"
   }
 }
