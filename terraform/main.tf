@@ -15,10 +15,10 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_instance" "test_instance1" {
-  ami           = "ami-053b0d53c279acc90"
-  instance_type = "t2.micro"
+resource "aws_s3_bucket" "example" {
+  bucket = "my-terraform-action-test-100000"
   tags = {
-    Name = "test_instance1"
+    Name        = "my-terraform-action-test-100000"
+    Environment = "Dev"
   }
 }
