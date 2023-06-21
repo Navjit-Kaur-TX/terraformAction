@@ -53,6 +53,10 @@ jobs:
         id: plan
 #         if: github.event_name == 'pull_request'
         run: terraform plan
+        
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply --auto-approve
 #         continue-on-error: true
       
 #       - uses: actions/github-script@v6
