@@ -6,6 +6,7 @@ terraform {
   }
 
   backend "s3" {
+    name = "terraform-action-test-100000"
     region = "us-east-1"
     key    = "terraform.tfstate"
   }
